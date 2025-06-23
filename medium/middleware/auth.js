@@ -1,22 +1,17 @@
-// middleware/auth.js
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
-
-  // Check if Authorization header is missing or invalid
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Unauthorized: No token' });
+  if (!authHeader?.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized. Token missing.' });
   }
 
-  const token = authHeader.split(' ')[1];
-
   try {
+    const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Make user info available in request
+    req.user = decoded; // { id: user._id }
     next();
-  } catch (err) {
-    console.error('JWT verification failed:', err);
-    res.status(401).json({ error: 'Unauthorized: Invalid token' });
+  } catch {
+    return res.status(401).json({ error: 'Invalid token' });
   }
 };

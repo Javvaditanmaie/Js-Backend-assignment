@@ -39,23 +39,26 @@ app.listen(3000, () => {
 });
 connectDB()**/
 
-require('dotenv').config();
 const express = require('express');
+const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/auth');
+const vibeRoutes = require('./routes/vibes');
+
+dotenv.config();
+connectDB();
+
 const app = express();
 app.use(express.json());
-const vibeRoutes = require('./routes/vibes');
-app.use('/api/v1/vibes', vibeRoutes); 
-app.use('/api/v1/auth', authRoutes);
-
-const PORT = process.env.PORT;
-const MONGO_URI = process.env.MONGO_URI;
 
 app.get('/', (req, res) => {
-  res.send('API is running');
+  res.send('Welcome to VibeCheck API');
 });
+
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/vibes', vibeRoutes);
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`Server blasting off on port ${PORT}`);
 });
-connectDB(); // ⬅️ Connect DB on startup
