@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Cheat Buster API
+  version: 1.0.0
+  description: API to check if a user exists in the database by email
+
+servers:
+  - url: http://localhost:3000/api
+
+paths:
+  /search:
+    get:
+      summary: Search for a user by email
+      parameters:
+        - in: query
+          name: email
+          schema:
+            type: string
+            format: email
+          required: true
+          description: Email address of the person to search for
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  firstname:
+                    type: string
+                  lastname:
+                    type: string
+                  email:
+                    type: string
+                  age:
+                    type: integer
+                  city:
+                    type: string
+                  picture:
+                    type: string
+        '400':
+          description: Invalid request or user not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal server error
