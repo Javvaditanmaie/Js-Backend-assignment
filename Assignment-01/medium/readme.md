@@ -23,6 +23,6 @@
         - This MUST succeed with a `201 Created` status.
         - The response body should contain the newly created vibe object.
         - In MongoDB Atlas, you can see a new document in the `vibes` collection, and its `user` field should contain the `ObjectId` of the user who posted it.
-  ![Screenshot 2025-06-21 222438](https://github.com/user-attachments/assets/9e11333c-1003-4142-900f-742755698e0f)
-![Screenshot 2025-06-21 224501](https://github.com/user-attachments/assets/3ff9b270-dcd4-4bb2-9a0b-3b0f1a5836f4)
-
+  
+![Screenshot 2025-06-23 122623](https://github.com/user-attachments/assets/871e74ec-52aa-4f22-b34c-363c9335006d)
+![Screenshot 2025-06-23 123039](https://github.com/user-attachments/assets/82caa7ca-b556-4c7c-84c0-788aff189fa4)
